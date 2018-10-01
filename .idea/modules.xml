@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo-netty/demo-netty.iml" filepath="$PROJECT_DIR$/demo-netty/demo-netty.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo-zuul/demo-zuul.iml" filepath="$PROJECT_DIR$/demo-zuul/demo-zuul.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/demomvc.iml" filepath="$PROJECT_DIR$/.idea/demomvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/mycloud.iml" filepath="$PROJECT_DIR$/mycloud.iml" />
     </modules>
   </component>
