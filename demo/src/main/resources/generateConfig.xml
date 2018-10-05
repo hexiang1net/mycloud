@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <classPathEntry
+            location="D:\repo\mysql-connector-java-5.1.26.jar" />
+    <context id="context1" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/test"
+                        userId="root" password="" />
+        <javaModelGenerator targetPackage="com.cn.hnust.pojo"
+                            targetProject="D:\Eclipse_Workspace\HNUST\org.zsl.hnust Maven Webapp\src\main\java" />
+
+        <sqlMapGenerator targetPackage="com.cn.hnust.mapping"
+                         targetProject="D:\Eclipse_Workspace\HNUST\org.zsl.hnust Maven Webapp\src\main\java" />
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.cn.hnust.dao"
+                             targetProject="D:\Eclipse_Workspace\HNUST\org.zsl.hnust Maven Webapp\src\main\java">
+        </javaClientGenerator>
+
+        <table tableName="t_student" domainObjectName="Address"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+    </context>
+</generatorConfiguration>
