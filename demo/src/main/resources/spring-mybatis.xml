@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+    <context:property-placeholder location="classpath:db.properties"/>
     <!--创建jdbc数据源 这里直接使用阿里的druid数据库连接池 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
         <property name="driverClassName" value="${mysql.driver}"/>
@@ -62,11 +67,26 @@
         <!-- MP 全局配置注入 -->
         <property name="globalConfig" ref="globalConfig"/>
 
+        <!-- 插件注册 -->
+        <property name="plugins">
+            <list>
+                <!-- 注册分页插件 -->
+                <bean class="com.baomidou.mybatisplus.plugins.PaginationInterceptor" />
+                <!-- 注入 SQL 性能分析插件，建议在开发环境中使用，可以在控制台查看 SQL 执行日志 -->
+                <bean class="com.baomidou.mybatisplus.plugins.PerformanceInterceptor">
+                    <property name="maxTime" value="1000" />
+                    <!--SQL 是否格式化 默认false-->
+                    <property name="format" value="true" />
+                </bean>
+            </list>
+        </property>
 
-     <!--   <plugins>
-            &lt;!&ndash; 分页插件配置 &ndash;&gt;
-            <plugin interceptor="com.baomidou.mybatisplus.plugins.PaginationInterceptor"></plugin>
-        </plugins>-->
+
+
+        <!--   <plugins>
+               &lt;!&ndash; 分页插件配置 &ndash;&gt;
+               <plugin interceptor="com.baomidou.mybatisplus.plugins.PaginationInterceptor"></plugin>
+           </plugins>-->
 
      <!--   <typeHandlers>
             <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler"
