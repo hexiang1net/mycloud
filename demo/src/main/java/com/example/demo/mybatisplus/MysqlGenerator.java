@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
-import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 import java.util.*;
@@ -50,23 +49,25 @@ public class MysqlGenerator {
                 // .setControllerName("%sAction")
         ).setDataSource(
                 // 数据源配置
-                new DataSourceConfig().setDbType(DbType.MYSQL)// 数据库类型
-                        .setTypeConvert(new MySqlTypeConvert() {
-                            // 自定义数据库表字段类型转换【可选】
-                            @Override
-                            public DbColumnType processTypeConvert(String fieldType) {
-                                System.out.println("转换类型：" + fieldType);
-                                // if ( fieldType.toLowerCase().contains( "tinyint" ) ) {
-                                // return DbColumnType.BOOLEAN;
-                                // }
-                                return super.processTypeConvert(fieldType);
-                            }
-                        }).setDriverName(DRIVER).setUsername(USER_NAME).setPassword(PASSWORD).setUrl(URL))
+                new DataSourceConfig()
+//                        .setDbType(DbType.MYSQL)// 数据库类型
+//                        .setTypeConvert(new MySqlTypeConvert() {
+//                            // 自定义数据库表字段类型转换【可选】
+//                            @Override
+//                            public DbColumnType processTypeConvert(String fieldType) {
+//                                System.out.println("转换类型：" + fieldType);
+//                                // if ( fieldType.toLowerCase().contains( "tinyint" ) ) {
+//                                // return DbColumnType.BOOLEAN;
+//                                // }
+//                                return super.processTypeConvert(fieldType);
+//                            }
+//                        })
+                        .setDriverName(DRIVER).setUsername(USER_NAME).setPassword(PASSWORD).setUrl(URL))
                 .setStrategy(
                         // 策略配置
                         new StrategyConfig()
                                 // .setCapitalMode(true)// 全局大写命名
-                                .setDbColumnUnderline(true)// 全局下划线命名
+//                                .setDbColumnUnderline(true)// 全局下划线命名
                                 // .setTablePrefix(new String[]{"unionpay_"})// 此处可以修改为您的表前缀
                                 .setNaming(NamingStrategy.underline_to_camel)// 表名生成策略
                                 // .setInclude(new String[] {"citycode_org"}) // 需要生成的表
