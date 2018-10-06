@@ -63,26 +63,26 @@
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <!--mybatis-->
-    <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
+    <!--<bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <!-- 自动扫描mapper.xml文件，支持通配符 -->
+        &lt;!&ndash; 自动扫描mapper.xml文件，支持通配符 &ndash;&gt;
         <property name="mapperLocations" value="classpath:mapper/**/*.xml"/>
-        <!-- 配置文件，比如参数配置(是否启动驼峰等)、插件配置等 -->
+        &lt;!&ndash; 配置文件，比如参数配置(是否启动驼峰等)、插件配置等 &ndash;&gt;
         <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
-        <!-- 启用别名，这样就无需写全路径类名了，具体可自行查阅资料 -->
+        &lt;!&ndash; 启用别名，这样就无需写全路径类名了，具体可自行查阅资料 &ndash;&gt;
         <property name="typeAliasesPackage" value="cn.lqdev.learning.springboot.chapter9.biz.entity"/>
-        <!-- MP 全局配置注入 -->
+        &lt;!&ndash; MP 全局配置注入 &ndash;&gt;
         <property name="globalConfig" ref="globalConfig"/>
 
-        <!-- 插件注册 -->
+        &lt;!&ndash; 插件注册 &ndash;&gt;
         <property name="plugins">
             <list>
-                <!-- 注册分页插件 -->
+                &lt;!&ndash; 注册分页插件 &ndash;&gt;
                 <bean class="com.baomidou.mybatisplus.plugins.PaginationInterceptor" />
-                <!-- 注入 SQL 性能分析插件，建议在开发环境中使用，可以在控制台查看 SQL 执行日志 -->
+                &lt;!&ndash; 注入 SQL 性能分析插件，建议在开发环境中使用，可以在控制台查看 SQL 执行日志 &ndash;&gt;
                 <bean class="com.baomidou.mybatisplus.plugins.PerformanceInterceptor">
                     <property name="maxTime" value="1000" />
-                    <!--SQL 是否格式化 默认false-->
+                    &lt;!&ndash;SQL 是否格式化 默认false&ndash;&gt;
                     <property name="format" value="true" />
                 </bean>
             </list>
@@ -90,30 +90,34 @@
 
 
 
-        <!--   <plugins>
+        &lt;!&ndash;   <plugins>
                &lt;!&ndash; 分页插件配置 &ndash;&gt;
                <plugin interceptor="com.baomidou.mybatisplus.plugins.PaginationInterceptor"></plugin>
-           </plugins>-->
+           </plugins>&ndash;&gt;
 
-     <!--   <typeHandlers>
+     &lt;!&ndash;   <typeHandlers>
             <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler"
                          javaType="cn.lqdev.learning.springboot.chapter9.biz.entity.StatusEnum"/>
-        </typeHandlers>-->
+        </typeHandlers>&ndash;&gt;
+
+    </bean>-->
 
 
-    </bean>
-    <bean id="globalConfig" class="com.baomidou.mybatisplus.entity.GlobalConfiguration">
-        <!--
+    <!--<bean id="globalConfig" class="com.baomidou.mybatisplus.entity.GlobalConfiguration">
+        &lt;!&ndash;
             AUTO->`0`("数据库ID自增")QW
              INPUT->`1`(用户输入ID")
             ID_WORKER->`2`("全局唯一ID")
             UUID->`3`("全局唯一ID")
-        -->
+        &ndash;&gt;
         <property name="idType" value="3" />
-    </bean>
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <!-- 自动扫描包路径，接口自动注册为一个bean类 -->
+    </bean>-->
+
+
+
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        &lt;!&ndash; 自动扫描包路径，接口自动注册为一个bean类 &ndash;&gt;
         <property name="basePackage" value="cn.lqdev.learning.springboot.chapter9.biz.dao"/>
-    </bean>
+    </bean>-->
 
 </beans>
