@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="demo-netty" />
         <module name="demo-zuul" />
+        <module name="demo02" />
         <module name="demomvc" />
       </profile>
     </annotationProcessing>
@@ -15,6 +16,7 @@
       <module name="demo" target="1.8" />
       <module name="demo-netty" target="1.8" />
       <module name="demo-zuul" target="1.8" />
+      <module name="demo02" target="1.8" />
       <module name="demomvc" target="1.8" />
       <module name="mynetty" target="1.8" />
     </bytecodeTargetLevel>
