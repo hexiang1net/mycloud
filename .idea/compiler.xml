@@ -9,7 +9,6 @@
         <module name="demo-netty" />
         <module name="demo-zuul" />
         <module name="demo02" />
-        <module name="demomvc" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
