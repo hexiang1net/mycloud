@@ -1,4 +1,4 @@
-package com.example.demo.mybatisplus;
+package com.example.demo02;
 
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;

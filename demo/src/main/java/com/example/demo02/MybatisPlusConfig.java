@@ -1,4 +1,4 @@
-package com.example.demo.mybatisplus;
+package com.example.demo02;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
