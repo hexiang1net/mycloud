@@ -7,21 +7,22 @@ import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
+import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 import java.util.*;
 
 public class MysqlGenerator {
 
-    private static final String PACKAGE_NAME = "cn.lqdev.learning.springboot.chapter9";
+    private static final String PACKAGE_NAME = "com.example.demo02.entity";
     private static final String MODULE_NAME = "biz";
-    private static final String OUT_PATH = "D:\\develop\\code";
+    private static final String OUT_PATH = "C:\\Users\\Administrator\\IdeaProjects2\\mycloud\\demo\\src\\main\\java";
     private static final String AUTHOR = "oKong";
 
     private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://127.0.0.1:3306/learning?useUnicode=true&characterEncoding=UTF-8";
+    private static final String URL = "jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8";
     private static final String USER_NAME = "root";
-    private static final String PASSWORD = "123456";
+    private static final String PASSWORD = "";
 
     /**
      * <p>
@@ -49,25 +50,23 @@ public class MysqlGenerator {
                 // .setControllerName("%sAction")
         ).setDataSource(
                 // 数据源配置
-                new DataSourceConfig()
-//                        .setDbType(DbType.MYSQL)// 数据库类型
-//                        .setTypeConvert(new MySqlTypeConvert() {
-//                            // 自定义数据库表字段类型转换【可选】
-//                            @Override
-//                            public DbColumnType processTypeConvert(String fieldType) {
-//                                System.out.println("转换类型：" + fieldType);
-//                                // if ( fieldType.toLowerCase().contains( "tinyint" ) ) {
-//                                // return DbColumnType.BOOLEAN;
-//                                // }
-//                                return super.processTypeConvert(fieldType);
-//                            }
-//                        })
-                        .setDriverName(DRIVER).setUsername(USER_NAME).setPassword(PASSWORD).setUrl(URL))
+                new DataSourceConfig().setDbType(DbType.MYSQL)// 数据库类型
+                        .setTypeConvert(new MySqlTypeConvert() {
+                            // 自定义数据库表字段类型转换【可选】
+                            @Override
+                            public DbColumnType processTypeConvert(String fieldType) {
+                                System.out.println("转换类型：" + fieldType);
+                                // if ( fieldType.toLowerCase().contains( "tinyint" ) ) {
+                                // return DbColumnType.BOOLEAN;
+                                // }
+                                return super.processTypeConvert(fieldType);
+                            }
+                        }).setDriverName(DRIVER).setUsername(USER_NAME).setPassword(PASSWORD).setUrl(URL))
                 .setStrategy(
                         // 策略配置
                         new StrategyConfig()
                                 // .setCapitalMode(true)// 全局大写命名
-//                                .setDbColumnUnderline(true)// 全局下划线命名
+                                .setDbColumnUnderline(true)// 全局下划线命名
                                 // .setTablePrefix(new String[]{"unionpay_"})// 此处可以修改为您的表前缀
                                 .setNaming(NamingStrategy.underline_to_camel)// 表名生成策略
                                 // .setInclude(new String[] {"citycode_org"}) // 需要生成的表
@@ -117,7 +116,7 @@ public class MysqlGenerator {
                                     // 自定义输出文件目录
                                     @Override
                                     public String outputFile(TableInfo tableInfo) {
-                                        return OUT_PATH + "/xml/" + tableInfo.getEntityName() + "Mapper.xml";
+                                        return "C:\\Users\\Administrator\\IdeaProjects2\\mycloud\\demo\\src\\main\\resources\\mapper\\" + tableInfo.getEntityName() + "Mapper.xml";
                                     }
                                 })))
                 .setTemplate(

@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx.xsd
-        http://www.springframework.org/schema/aop
-        http://www.springframework.org/schema/aop/spring-aop.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <!-- PropertyPlaceholderConfigurer类中有个locations属性，接收的是一个数组，即我们可以在下面配好多个properties文件 -->
+            <array>
+                <value>classpath:db.properties</value>
+            </array>
+        </property>
+    </bean>
 
-    <context:property-placeholder location="classpath:db.properties"/>
     <!--创建jdbc数据源 这里直接使用阿里的druid数据库连接池 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
-        <property name="driverClassName" value="${mysql.driver}"/>
-        <property name="url" value="${mysql.url}"/>
-        <property name="username" value="${mysql.username}"/>
-        <property name="password" value="${mysql.password}"/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
         <!-- 初始化连接大小 -->
         <property name="initialSize" value="0"/>
         <!-- 连接池最大使用连接数量 -->
@@ -32,7 +29,7 @@
         <!-- 获取连接最大等待时间 -->
         <property name="maxWait" value="60000"/>
 
-        <property name="validationQuery" value="${validationQuery}"/>
+        <property name="validationQuery" value="select 1"/>
         <property name="testOnBorrow" value="false"/>
         <property name="testOnReturn" value="false"/>
         <property name="testWhileIdle" value="true"/>
@@ -63,61 +60,29 @@
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <!--mybatis-->
-    <!--<bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
+    <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        &lt;!&ndash; 自动扫描mapper.xml文件，支持通配符 &ndash;&gt;
+        <!-- 自动扫描mapper.xml文件，支持通配符 -->
         <property name="mapperLocations" value="classpath:mapper/**/*.xml"/>
-        &lt;!&ndash; 配置文件，比如参数配置(是否启动驼峰等)、插件配置等 &ndash;&gt;
+        <!-- 配置文件，比如参数配置(是否启动驼峰等)、插件配置等 -->
         <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
-        &lt;!&ndash; 启用别名，这样就无需写全路径类名了，具体可自行查阅资料 &ndash;&gt;
+        <!-- 启用别名，这样就无需写全路径类名了，具体可自行查阅资料 -->
         <property name="typeAliasesPackage" value="cn.lqdev.learning.springboot.chapter9.biz.entity"/>
-        &lt;!&ndash; MP 全局配置注入 &ndash;&gt;
+        <!-- MP 全局配置注入 -->
         <property name="globalConfig" ref="globalConfig"/>
-
-        &lt;!&ndash; 插件注册 &ndash;&gt;
-        <property name="plugins">
-            <list>
-                &lt;!&ndash; 注册分页插件 &ndash;&gt;
-                <bean class="com.baomidou.mybatisplus.plugins.PaginationInterceptor" />
-                &lt;!&ndash; 注入 SQL 性能分析插件，建议在开发环境中使用，可以在控制台查看 SQL 执行日志 &ndash;&gt;
-                <bean class="com.baomidou.mybatisplus.plugins.PerformanceInterceptor">
-                    <property name="maxTime" value="1000" />
-                    &lt;!&ndash;SQL 是否格式化 默认false&ndash;&gt;
-                    <property name="format" value="true" />
-                </bean>
-            </list>
-        </property>
-
-
-
-        &lt;!&ndash;   <plugins>
-               &lt;!&ndash; 分页插件配置 &ndash;&gt;
-               <plugin interceptor="com.baomidou.mybatisplus.plugins.PaginationInterceptor"></plugin>
-           </plugins>&ndash;&gt;
-
-     &lt;!&ndash;   <typeHandlers>
-            <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler"
-                         javaType="cn.lqdev.learning.springboot.chapter9.biz.entity.StatusEnum"/>
-        </typeHandlers>&ndash;&gt;
-
-    </bean>-->
-
-
-    <!--<bean id="globalConfig" class="com.baomidou.mybatisplus.entity.GlobalConfiguration">
-        &lt;!&ndash;
+    </bean>
+    <bean id="globalConfig" class="com.baomidou.mybatisplus.entity.GlobalConfiguration">
+        <!--
             AUTO->`0`("数据库ID自增")QW
              INPUT->`1`(用户输入ID")
             ID_WORKER->`2`("全局唯一ID")
             UUID->`3`("全局唯一ID")
-        &ndash;&gt;
+        -->
         <property name="idType" value="3" />
-    </bean>-->
-
-
-
-    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        &lt;!&ndash; 自动扫描包路径，接口自动注册为一个bean类 &ndash;&gt;
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 自动扫描包路径，接口自动注册为一个bean类 -->
         <property name="basePackage" value="cn.lqdev.learning.springboot.chapter9.biz.dao"/>
-    </bean>-->
+    </bean>
 
 </beans>
