@@ -292,4 +292,55 @@ public class WXPayUtil {
         return System.currentTimeMillis();
     }
 
+    public static void main(String[] args){
+        String str = "<xml><return_code><![CDATA[SUCCESS]]></return_code>\n" +
+                "<return_msg><![CDATA[OK]]></return_msg>\n" +
+                "<appid><![CDATA[wx454800986353aea2]]></appid>\n" +
+                "<mch_id><![CDATA[1333895801]]></mch_id>\n" +
+                "<nonce_str><![CDATA[WB0PtJvi5G94B49Z]]></nonce_str>\n" +
+                "<sign><![CDATA[5E1FC8CA0D72CD3E1E7DE48ED2EBF9CA]]></sign>\n" +
+                "<result_code><![CDATA[SUCCESS]]></result_code>\n" +
+                "<openid><![CDATA[oYu1ms1imn0tpkh88m-mkTFUsOro]]></openid>\n" +
+                "<is_subscribe><![CDATA[N]]></is_subscribe>\n" +
+                "<trade_type><![CDATA[NATIVE]]></trade_type>\n" +
+                "<bank_type><![CDATA[CMB_CREDIT]]></bank_type>\n" +
+                "<total_fee>1</total_fee>\n" +
+                "<fee_type><![CDATA[CNY]]></fee_type>\n" +
+                "<transaction_id><![CDATA[4200000194201810171200221016]]></transaction_id>\n" +
+                "<out_trade_no><![CDATA[201810180432268798258]]></out_trade_no>\n" +
+                "<attach><![CDATA[]]></attach>\n" +
+                "<time_end><![CDATA[20181017203152]]></time_end>\n" +
+                "<trade_state><![CDATA[SUCCESS]]></trade_state>\n" +
+                "<cash_fee>1</cash_fee>\n" +
+                "<trade_state_desc><![CDATA[支付成功]]></trade_state_desc>\n" +
+                "</xml>";
+
+        String str2 = "<xml><return_code><![CDATA[SUCCESS]]></return_code>\n" +
+                "<return_msg><![CDATA[OK]]></return_msg>\n" +
+                "<appid><![CDATA[wx454800986353aea2]]></appid>\n" +
+                "<mch_id><![CDATA[1333895801]]></mch_id>\n" +
+                "<nonce_str><![CDATA[jiS0NIl4kILaGcHk]]></nonce_str>\n" +
+                "<sign><![CDATA[E2D1ADBC46791B18A765B06C998D3E07]]></sign>\n" +
+                "<result_code><![CDATA[SUCCESS]]></result_code>\n" +
+                "<out_trade_no><![CDATA[201810181016146867454]]></out_trade_no>\n" +
+                "<trade_state><![CDATA[NOTPAY]]></trade_state>\n" +
+                "<trade_state_desc><![CDATA[订单未支付]]></trade_state_desc>\n" +
+                "</xml>";
+        try{
+            Map<String, String> stringStringMap = xmlToMap(str);
+            String s = generateSignature(stringStringMap, "8a1fef2169727627f113e16a8cf26209");
+            System.out.println(s);
+
+            boolean signatureValid = isSignatureValid(stringStringMap, "8a1fef2169727627f113e16a8cf26209");
+            System.out.println(signatureValid);
+
+            boolean signatureValid1 = isSignatureValid(str2, "8a1fef2169727627f113e16a8cf26209");
+            System.out.println(signatureValid1);
+
+        }catch (Exception e){
+
+        }
+
+    }
+
 }
