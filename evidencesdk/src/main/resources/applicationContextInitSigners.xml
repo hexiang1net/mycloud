@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+         http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+         http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+	<bean id="channelService" class="cn.webank.channel.client.Service">
+		<property name="orgID" value="WB" />
+		<property name="allChannelConnections">
+			<map>
+				<entry key="WB">
+					<bean class="cn.webank.channel.handler.ChannelConnections">
+						<property name="connectionsStr">
+							<list>
+								<value>fc6a89a338a6004f76f16f3ffd7437e538947b27c5a1a35858445c54bdfce6e074de3d9cec89b6e5f4ff49f11cae0db1847954cb1fc793085ab14292072aba2a@119.29.57.154:30330</value>
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<entry key="GZ">
+					<bean class="cn.webank.channel.handler.ChannelConnections">
+						<property name="connectionsStr">
+							<list>
+								<value>2936fa455a6ca3633fbc52cf0ca0cbe721085f00f0136be59dab4ea9879d4f352a38503689e85a3b6a509c66222104de961ebdf5fe238abe2cc311b64799ddaf@119.29.57.154:30331</value>
+							</list>
+						</property>
+					</bean>
+				</entry>
+				<entry key="EB">
+					<bean class="cn.webank.channel.handler.ChannelConnections">
+						<property name="connectionsStr">
+							<list>
+								<value>5540a20b1cb3d4caa8618379c1ace5b8f7ae4bd9260daf4264adcf0476b615f1ba727cd5eedc08717cb5279b072d1027922295acf623ee44fcf596f6c8ba0e24@119.29.57.154:30332</value>
+							</list>
+						</property>
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="addressConf" class="cn.webank.evidence.utils.PublicAddressConf">
+		<property name="allPublicAddress">
+			<map>
+				<entry key="WB" value="0x33674063c4618f4773fac75dc2f07e55f6f391ce">
+				</entry>
+				<entry key="GZ" value="0x76bd2381c5d578279eace9a0bd733395658e6384">
+				</entry>
+				<entry key="EB" value="0x80560d020d824e52316eb6e534e449aa39316413">
+				</entry>
+			</map>
+		</property>
+	</bean>
+</beans>
